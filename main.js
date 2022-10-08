@@ -13,24 +13,43 @@ div.appendChild(renderer.domElement);
 
 // object (kubus)
 const geometry = new THREE.BoxGeometry( 1, 1, 1 );
-const material = new THREE.MeshBasicMaterial( { color: 0x00dd00 } );
+// ini warna constant
+// const material = new THREE.MeshBasicMaterial( { color: 0x00dd00 } );
+// ini tidacc, react with light
+const material = new THREE.MeshStandardMaterial({color: '#8AC'});
 const cube = new THREE.Mesh( geometry, material );
 scene.add( cube );
 
-// // let there be light
-// const directionalLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
-// scene.add( directionalLight );
-
+// let there be light
+const color = 0xFFFFFF;
+const intensity = 1;
+const light = new THREE.DirectionalLight(color, intensity);
+light.position.set(0, 10, 0);
+light.target.position.set(-5, 0, 0);
+scene.add(light);
+scene.add(light.target);
 // control
 const controls = new OrbitControls( camera, renderer.domElement );
 controls.update();
 
 // const gui = new dat.GUI();
+let freeze = false;
+window.addEventListener("mousedown", freezeit);
+function freezeit(){
+    freeze=true;
+}
+
+window.addEventListener("mouseup", unfreezeit);
+function unfreezeit(){
+    freeze=false;
+}
 
 function animate() {
 	requestAnimationFrame( animate );
-    // cube.rotation.x += 0.01;
-    // cube.rotation.y += 0.01;
+    if(!freeze){
+        cube.rotation.x += 0.01;
+        cube.rotation.y += 0.01;  
+    }
     // cube.rotation.z += 0.01;
     controls.update();
     renderer.render(scene, camera);
