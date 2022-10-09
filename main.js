@@ -6,10 +6,9 @@ scene.background = new THREE.Color(0x00bbbb);
 const camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 0.1, 1000 );
 camera.position.set(0, 0, 5);
 
-const renderer = new THREE.WebGLRenderer();   
+const canvas = document.getElementById("our_canvas");
+const renderer = new THREE.WebGLRenderer({canvas});   
 renderer.setSize( window.innerWidth*0.75, window.innerHeight*0.75, false);
-let div = document.getElementById("container");
-div.appendChild(renderer.domElement);
 
 // object (kubus)
 const geometry = new THREE.BoxGeometry( 1, 1, 1 );
