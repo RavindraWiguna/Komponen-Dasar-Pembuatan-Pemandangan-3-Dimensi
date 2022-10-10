@@ -49,6 +49,14 @@ function unfreezeit() {
   freeze = false;
 }
 
+function onWindowResize() {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+}
+
+window.addEventListener("resize", onWindowResize, false);
+
 function animate() {
   requestAnimationFrame(animate);
   if (!freeze) {
@@ -59,4 +67,5 @@ function animate() {
   controls.update();
   renderer.render(scene, camera);
 }
+
 animate();
