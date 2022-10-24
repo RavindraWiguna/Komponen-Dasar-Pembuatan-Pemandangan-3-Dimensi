@@ -21,7 +21,7 @@ const geometry = new THREE.BoxGeometry(1, 1, 1);
 // ini warna constant
 // const material = new THREE.MeshBasicMaterial( { color: 0x00dd00 } );
 // ini tidacc, react with light
-const material = new THREE.MeshStandardMaterial({ color: "#8AC" });
+const material = new THREE.MeshPhongMaterial({ color: "#8AC" });
 const cube = new THREE.Mesh(geometry, material);
 scene.add(cube);
 
